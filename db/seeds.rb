@@ -12,8 +12,39 @@ ApplicationRecord.transaction do
   ##########################
   p '=== User ==='
 
-  user = User.find_or_initialize_by(name: '山田太郎', account_id: 'tyamada',email: ENV.fetch('DEMO_USER_EMAIL', 'test@test.com'))
-  user.password = 'password'
-  user.skip_confirmation!
-  user.save!
+  users = [
+    {name: '山田太郎', account_id: 'tyamada',email: ENV.fetch('DEMO_USER_EMAIL', 'test@test.com')},
+    {name: 'テストユーザーA', account_id: 'usera',email: 'test_a@test.com'},
+    {name: 'テストユーザーB', account_id: 'userb',email: 'test_b@test.com'},
+    {name: 'テストユーザーC', account_id: 'userc',email: 'test_c@test.com'},
+    {name: 'テストユーザーD', account_id: 'userd',email: 'test_d@test.com'},
+    {name: 'テストユーザーE', account_id: 'usere',email: 'test_e@test.com'},
+  ]
+
+  users.each do |user|
+    user = User.find_or_initialize_by(user)
+    user.password = 'password'
+    user.skip_confirmation!
+    user.save!
+  end
+
+  test_user = User.find_by(name: '山田太郎')
+
+  ##########################
+  # フォロー
+  ##########################
+  p '=== Relationship ==='
+
+  relationships = [
+    {user: User.find_by(name: 'テストユーザーA'), follow: test_user},
+    {user: User.find_by(name: 'テストユーザーB'), follow: test_user},
+    {user: User.find_by(name: 'テストユーザーC'), follow: test_user},
+    {user: User.find_by(name: 'テストユーザーD'), follow: test_user},
+    {user: User.find_by(name: 'テストユーザーE'), follow: test_user},
+  ]
+
+  relationships.each do |relationship|
+    object = Relationship.find_or_initialize_by(relationship)
+    object.save!
+  end
 end
