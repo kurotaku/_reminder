@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_015814) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_021202) do
   create_table "bookings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "holder_id", null: false
@@ -29,6 +29,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_015814) do
     t.index ["follow_id"], name: "index_relationships_on_follow_id"
     t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
+
+  create_table "reminders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "receiver_id", null: false
+    t.bigint "booking_id", null: false
+    t.integer "send_status", default: 0, null: false
+    t.datetime "scheduled_at"
+    t.datetime "send_at"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reminders_on_booking_id"
+    t.index ["receiver_id"], name: "index_reminders_on_receiver_id"
+    t.index ["user_id"], name: "index_reminders_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -59,4 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_015814) do
   add_foreign_key "bookings", "users", column: "holder_id"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+  add_foreign_key "reminders", "bookings"
+  add_foreign_key "reminders", "users"
+  add_foreign_key "reminders", "users", column: "receiver_id"
 end
