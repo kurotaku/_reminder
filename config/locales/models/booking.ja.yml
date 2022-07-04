@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      booking: 予約
+    attributes:
+      booking:
+        user: ユーザー
+        user_id: ユーザー
+        holder: 予約者
+        holder_id: 予約者
+        send_status: 送信ステータス
+  enums:
+    send_status:
+      unsent: 未送信
+      sent: 送信済み
+      failed: 送信失敗
