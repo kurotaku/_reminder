@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      booking: ユーザー
+    attributes:
+      booking:
+        user: ユーザー
+        user_id: ユーザー
+        receiver: 受信者
+        receiver_id: 受信者
+        booking: 予約
+        booking_id: 予約
+        send_at: 送信日時
+        start_at: 開始日時
