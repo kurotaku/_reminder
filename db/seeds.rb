@@ -47,4 +47,18 @@ ApplicationRecord.transaction do
     object = Relationship.find_or_initialize_by(relationship)
     object.save!
   end
+
+  ##########################
+  # 予約
+  ##########################
+  p '=== Booking ==='
+
+  time = Time.zone.now
+  time = time.change(hour: 14, minute: 0)
+
+  users = User.all.reject{|user| user == test_user}
+
+  30.times do |i|
+    Booking.create!(user: test_user, holder: users[rand(users.count)], start_at: time + i.day)
+  end
 end
