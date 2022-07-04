@@ -1,7 +1,7 @@
 ja:
   activerecord:
     models:
-      booking: ユーザー
+      booking: 予約
     attributes:
       booking:
         user: ユーザー

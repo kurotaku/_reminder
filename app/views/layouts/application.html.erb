@@ -16,5 +16,11 @@
     <%= yield %>
     <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete } %>
 
+    <p><%= t('activerecord.models.user') %></p>
+    <p><%= t('activerecord.models.booking') %></p>
+    <p><%= t('activerecord.models.remind') %></p>
+
+
+
   </body>
 </html>
