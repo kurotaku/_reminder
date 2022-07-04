@@ -29,4 +29,10 @@ class Reminder < ApplicationRecord
   belongs_to :user
   belongs_to :receiver, class_name: 'User'
   belongs_to :booking
+
+  enum send_status: {
+    unsent: 0,
+    sent: 10,
+    failed: 20
+  }
 end
