@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+ApplicationRecord.transaction do
+  ##########################
+  # ユーザー
+  ##########################
+  p '=== User ==='
+
+  user = User.find_or_initialize_by(name: '山田太郎', account_id: 'tyamada',email: ENV.fetch('DEMO_USER_EMAIL', 'test@test.com'))
+  user.password = 'password'
+  user.skip_confirmation!
+  user.save!
+end
